@@ -28,6 +28,15 @@ public class Rate {
 	public Rate() {
 		super();
 	}
+	
+	public Rate(String ratingId, String userId, String hotelId, int rating, String feedback) {
+		super();
+		this.ratingId = ratingId;
+		this.userId = userId;
+		this.hotelId = hotelId;
+		this.rating = rating;
+		this.feedback = feedback;
+	}
 
 	public String getRatingId() {
 		return ratingId;
