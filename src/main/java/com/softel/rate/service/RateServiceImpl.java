@@ -58,7 +58,7 @@ public class RateServiceImpl implements RateService {
 
 		rateRepository.deleteById(ratingId);
 		
-		return "The Rate has been successfully deleted";
+		return "The Rate has been deleted successfully.";
 	}
 	
 
