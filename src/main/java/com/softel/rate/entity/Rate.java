@@ -6,29 +6,29 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="micro_ratings")
+@Table(name = "micro_ratings")
 public class Rate {
 
 	@Id
-	@Column(name="Rating ID")
+	@Column(name = "Rating ID")
 	private String ratingId;
-	
-	@Column(name="User ID")
+
+	@Column(name = "User ID")
 	private String userId;
-	
-	@Column(name="Hotel ID")
+
+	@Column(name = "Hotel ID")
 	private String hotelId;
-	
-	@Column(name="Rating")
+
+	@Column(name = "Rating")
 	private int rating;
-	
-	@Column(name="Feedback")
+
+	@Column(name = "Feedback")
 	private String feedback;
 
 	public Rate() {
 		super();
 	}
-	
+
 	public Rate(String ratingId, String userId, String hotelId, int rating, String feedback) {
 		super();
 		this.ratingId = ratingId;
@@ -77,5 +77,11 @@ public class Rate {
 	public void setFeedback(String feedback) {
 		this.feedback = feedback;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Rate [ratingId=" + ratingId + ", userId=" + userId + ", hotelId=" + hotelId + ", rating=" + rating
+				+ ", feedback=" + feedback + "]";
+	}
+
 }
