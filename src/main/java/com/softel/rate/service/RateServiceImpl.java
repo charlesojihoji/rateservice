@@ -1,12 +1,15 @@
 package com.softel.rate.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.softel.rate.entity.Rate;
+import com.softel.rate.entity.RateServiceResponse;
 import com.softel.rate.repository.RateRepository;
 
 @Service
@@ -35,9 +38,24 @@ public class RateServiceImpl implements RateService {
 	}
 
 	@Override
-	public List<Rate> getRatingsByHotelId(String hotelId) {
+	public List<RateServiceResponse> getRatingsByHotelId(String hotelId) {
+		
+		List<Rate> listOfRatings = rateRepository.findByHotelId(hotelId);
 
-		return rateRepository.findByHotelId(hotelId);
+		List<RateServiceResponse> listOfRateServiceResponse = new ArrayList<RateServiceResponse>();
+				
+		for(Rate rate: listOfRatings) {
+			RateServiceResponse rateObj = new RateServiceResponse();
+			rateObj.setFeedback(rate.getFeedback());
+			rateObj.setHotelId(rate.getHotelId());
+			rateObj.setRating(rate.getRating());
+			rateObj.setRatingId(rate.getRatingId());
+			rateObj.setUserId(rate.getUserId());
+			
+			listOfRateServiceResponse.add(rateObj);
+		}
+		
+		return listOfRateServiceResponse;
 	}
 
 	@Override
