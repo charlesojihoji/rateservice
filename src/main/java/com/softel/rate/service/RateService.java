@@ -13,4 +13,6 @@ public interface RateService {
 	public List<RateServiceResponse> getRatingsByHotelId(String hotelId);
 	public Rate update(Rate rate, String ratingId);
 	public String delete(String ratingId);
+
+	public List<RateServiceResponse> getListOfHotelIdsBasedOnrating(String hotelId);
 }

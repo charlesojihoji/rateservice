@@ -57,6 +57,26 @@ public class RateServiceImpl implements RateService {
 		
 		return listOfRateServiceResponse;
 	}
+	@Override
+	public List<RateServiceResponse> getListOfHotelIdsBasedOnrating(String ratingNo) {
+
+		List<Rate> listOfRatings = rateRepository.findByRating(Integer.parseInt(ratingNo));
+
+		List<RateServiceResponse> listOfRateServiceResponse = new ArrayList<RateServiceResponse>();
+
+		for(Rate rate: listOfRatings) {
+			RateServiceResponse rateObj = new RateServiceResponse();
+			rateObj.setFeedback(rate.getFeedback());
+			rateObj.setHotelId(rate.getHotelId());
+			rateObj.setRating(rate.getRating());
+			rateObj.setRatingId(rate.getRatingId());
+			rateObj.setUserId(rate.getUserId());
+
+			listOfRateServiceResponse.add(rateObj);
+		}
+
+		return listOfRateServiceResponse;
+	}
 
 	@Override
 	public Rate update(Rate newRate, String ratingId) {

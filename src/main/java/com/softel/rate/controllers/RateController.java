@@ -2,9 +2,11 @@ package com.softel.rate.controllers;
 
 import java.util.List;
 
+import com.softel.rate.entity.RateServiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +21,7 @@ import com.softel.rate.entity.Rate;
 import com.softel.rate.service.RateService;
 
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping(value="/ratings",produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class RateController {
 
 	@Autowired
@@ -37,25 +39,30 @@ public class RateController {
 		return ResponseEntity.status(HttpStatus.OK).body(rateService.getAllRatings());
 	}
 	
-	@GetMapping("users/{userId}")
+	@GetMapping("/users/{userId}")
 	public ResponseEntity<List<Rate>> getRatingsByUserId(@PathVariable String userId){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(rateService.getRatingsByUserId(userId));
 	}
 	
-	@GetMapping("hotels/{hotelId}")
-	public ResponseEntity<List<Rate>> getRatingsByHotelId(@PathVariable String hotelId){
+	@GetMapping("/hotels/{hotelId}")
+	public ResponseEntity<List<RateServiceResponse>> getRatingsByHotelId(@PathVariable String hotelId){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(rateService.getRatingsByHotelId(hotelId));
 	}
+	@GetMapping("/hotels/ratingNo/{ratingNo}")
+	public ResponseEntity<List<RateServiceResponse>> getListOfHotelIdsBasedOnrating(@PathVariable String ratingNo){
+
+		return ResponseEntity.status(HttpStatus.OK).body(rateService.getListOfHotelIdsBasedOnrating(ratingNo));
+	}
 	
-	@PutMapping("update/{ratingId}")
+	@PutMapping("/update/{ratingId}")
 	public ResponseEntity<Rate> updateRate(@RequestBody Rate newRate, @PathVariable String ratingId){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(rateService.update(newRate, ratingId));
 	}
 	
-	@DeleteMapping("delete/{ratingId}")
+	@DeleteMapping("/delete/{ratingId}")
 	public ResponseEntity<String> deleteRate(@PathVariable String ratingId){
 		
 		return ResponseEntity.status(HttpStatus.OK).body(rateService.delete(ratingId));

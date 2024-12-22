@@ -10,7 +10,9 @@ import com.softel.rate.entity.Rate;
 @Repository
 public interface RateRepository extends JpaRepository<Rate, String> {
 
-	public List<Rate> findByUserId(String userId);
+	List<Rate> findByUserId(String userId);
 	
-	public List<Rate> findByHotelId(String hotelId);
+	List<Rate> findByHotelId(String hotelId);
+
+	List<Rate> findByRating(Integer hotelId);
 }
